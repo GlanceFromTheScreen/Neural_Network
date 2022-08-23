@@ -1,0 +1,15 @@
+notes.txt
+/C_code/cmake-build-debug
+/C_code/.idea
+/C_code/img_learn.txt
+/C_code/img_test.txt
+/C_code/lab_learn.txt
+/C_code/lab_test.txt
+/C_code/weight_matrices_after_learn.txt
+/Python_code/.idea
+/Python_code/output.txt
+/Python_code/output_lable.txt
+/Python_code/t10k-images.idx3-ubyte
+/Python_code/t10k-labels.idx1-ubyte
+/Python_code/train-images.idx3-ubyte
+/Python_code/train-labels.idx1-ubyte
