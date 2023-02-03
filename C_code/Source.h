@@ -15,12 +15,12 @@ namespace nw {
         int true_value_lbl;
     public:
         Source(int size_of_input_vector_, int train_img_amount_, Network* network_) {
-            this->train_img_amount = train_img_amount_;
-            this->size_of_input_vector = size_of_input_vector_;
-            this->input_vector = new double [size_of_input_vector_];
-            this->net_work = network_;
+            train_img_amount = train_img_amount_;
+            size_of_input_vector = size_of_input_vector_;
+            input_vector = new double [size_of_input_vector_];
+            net_work = network_;
         }
-        ~Source() {delete[] this->input_vector;}
+        ~Source() {delete[] input_vector;}
 
         void NeuralNetworkLearn(std::string filename_img, std::string filename_lbl, std::function<double(double)> activate_fun_der, double step, double alfa);
         void WeightMatricesAfterLearn(std::string filename_output);

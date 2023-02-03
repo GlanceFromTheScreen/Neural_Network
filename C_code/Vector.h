@@ -10,8 +10,8 @@ namespace nw {
         int amount_of_neurons;
     public:
         Vector() : vector_of_neurons(nullptr), amount_of_neurons(0) {}
-        Vector(int AmountOfNeurons) { this->MemoryAlloc(AmountOfNeurons); }
-        ~Vector() { delete[] this->vector_of_neurons; }
+        Vector(int AmountOfNeurons) { MemoryAlloc(AmountOfNeurons); }
+        ~Vector() { delete[] vector_of_neurons; }
 
         void MemoryAlloc(int AmountOfNeurons);
         void InitByValues(const double *values);

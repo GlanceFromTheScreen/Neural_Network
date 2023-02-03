@@ -18,16 +18,16 @@ namespace nw {
 
     public:
         Network() {
-            this->layers_of_neurons = nullptr;
-            this->matrices_of_weights = nullptr;
-            this->matrices_of_shift = nullptr;
-            this->vector_of_delta = nullptr;
-            this->true_output = -1;
-            this->amount_of_layers = 0;
+            layers_of_neurons = nullptr;
+            matrices_of_weights = nullptr;
+            matrices_of_shift = nullptr;
+            vector_of_delta = nullptr;
+            true_output = -1;
+            amount_of_layers = 0;
         }
 
         Network(int AmountOfLayers, int* NeuronsInLayer) {
-            this->InitNetwork(AmountOfLayers, NeuronsInLayer);
+            InitNetwork(AmountOfLayers, NeuronsInLayer);
         }
 
         ~Network() {

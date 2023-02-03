@@ -10,12 +10,12 @@ void nw::Source::NeuralNetworkLearn(std::string filename_img, std::string filena
     try {
         in_img.open(filename_img);
         in_lbl.open(filename_lbl);
-        for(int p = 0; p < this->train_img_amount; ++p) {
-            in_lbl >> this->true_value_lbl;
-            for(int i = 0; i < this->size_of_input_vector; ++i) {
-                in_img >> this->input_vector[i];
+        for(int p = 0; p < train_img_amount; ++p) {
+            in_lbl >> true_value_lbl;
+            for(int i = 0; i < size_of_input_vector; ++i) {
+                in_img >> input_vector[i];
             }
-            this->net_work->LearnStep(input_vector, true_value_lbl, activate_fun_der, step, alfa);
+            net_work->LearnStep(input_vector, true_value_lbl, activate_fun_der, step, alfa);
         }
         in_img.close();
     }
@@ -30,11 +30,11 @@ void nw::Source::WeightMatricesAfterLearn(std::string filename_output) {
     file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
     try {
         file.open(filename_output);
-        for(int k = 0; k < this->net_work->amount_of_layers - 1; ++k) {
-            for(int i = 0; i < this->net_work->matrices_of_weights[k].amount_of_rows; ++i) {
+        for(int k = 0; k < net_work->amount_of_layers - 1; ++k) {
+            for(int i = 0; i < net_work->matrices_of_weights[k].amount_of_rows; ++i) {
                 file << std::endl;
-                for(int j = 0; j < this->net_work->matrices_of_weights[k].amount_of_columns; ++j) {
-                    file << this->net_work->matrices_of_weights[k].matrix_of_weights[i][j] << " ";
+                for(int j = 0; j < net_work->matrices_of_weights[k].amount_of_columns; ++j) {
+                    file << net_work->matrices_of_weights[k].matrix_of_weights[i][j] << " ";
                 }
             }
         }
@@ -51,11 +51,11 @@ void nw::Source::WeightMatricesInit(std::string filename_input) {
     file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
     try {
         file.open(filename_input);
-        for(int k = 0; k < this->net_work->amount_of_layers - 1; ++k) {
+        for(int k = 0; k < net_work->amount_of_layers - 1; ++k) {
             int c = net_work->matrices_of_weights[k].amount_of_columns * net_work->matrices_of_weights[k].amount_of_rows;
             double* array = new double[c];
             for(int v = 0; v < c; ++v) { file >> array[v]; }
-            this->net_work->matrices_of_weights[k].InitMatrixByArray(array);
+            net_work->matrices_of_weights[k].InitMatrixByArray(array);
             delete[] array;
         }
         file.close();
@@ -78,16 +78,16 @@ void nw::Source::Test(int amount_of_tests, std::string filename_input, std::stri
         in_img.open(filename_input);
         in_lbl.open(filename_lbl);
         for(int p = 0; p < amount_of_tests; ++p) {
-            in_lbl >> this->true_value_lbl;
-            for(int i = 0; i < this->size_of_input_vector; ++i) {
-                in_img >> this->input_vector[i];
+            in_lbl >> true_value_lbl;
+            for(int i = 0; i < size_of_input_vector; ++i) {
+                in_img >> input_vector[i];
             }
-            this->net_work->layers_of_neurons[0].InitByValues(input_vector);
-            this->net_work->ForwardPass();
+            net_work->layers_of_neurons[0].InitByValues(input_vector);
+            net_work->ForwardPass();
             double max = 0;
             int v = 0;
-            for(int m = 0; m < this->net_work->layers_of_neurons[this->net_work->amount_of_layers - 1].amount_of_neurons; ++m) {
-                double tmp = this->net_work->layers_of_neurons[this->net_work->amount_of_layers - 1].vector_of_neurons[m];
+            for(int m = 0; m < net_work->layers_of_neurons[net_work->amount_of_layers - 1].amount_of_neurons; ++m) {
+                double tmp = net_work->layers_of_neurons[net_work->amount_of_layers - 1].vector_of_neurons[m];
                 if(tmp > max) {
                     max = tmp;
                     v = m;
@@ -130,11 +130,11 @@ void nw::Source::NeuralNetworkLearn_2(std::string filename_img, std::string file
                 in_lbl  >> buffer;
             }
             //  main loop
-            for(int p = 0; p < this->train_img_amount / generation; ++p) {
-                in_lbl >> this->true_value_lbl;
+            for(int p = 0; p < train_img_amount / generation; ++p) {
+                in_lbl >> true_value_lbl;
 
-                for(int i = 0; i < this->size_of_input_vector; ++i) {
-                    in_img >> this->input_vector[i];
+                for(int i = 0; i < size_of_input_vector; ++i) {
+                    in_img >> input_vector[i];
                 }
 
                 for(int mess = 0; mess < 28*(generation - 1); mess++) {
@@ -143,7 +143,7 @@ void nw::Source::NeuralNetworkLearn_2(std::string filename_img, std::string file
                 for(int mess = 0; mess < (generation - 1); mess++) {
                     in_lbl >> buffer;
                 }
-                this->net_work->LearnStep(input_vector, true_value_lbl, activate_fun_der, step, alfa);
+                net_work->LearnStep(input_vector, true_value_lbl, activate_fun_der, step, alfa);
             }
         }
 
